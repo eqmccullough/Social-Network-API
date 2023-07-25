@@ -1,7 +1,7 @@
 {
     "name": "module18challenge",
     "version": "1.0.1",
-    "description": "Instructor demo for CRUD operations in Mongoose on subdocuments",
+    "description": "Social network API",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
