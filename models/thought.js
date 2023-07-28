@@ -1,26 +1,26 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('../models');
 
-// Schema to create User model
+// Schema to create thought model
 const thoughtSchema = new Schema(
   {
 
     thoughtText: {
-        type: String,
-        required: true,
-        max_length: 280,
-        min_length: 1,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now(),
-      },
-    username: [
+      type: String,
+      required: true,
+      max_length: 280,
+      min_length: 1,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      get: data => new Date(data).toLocaleDateString()
+    },
+    username:
     {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-      }
-    ],
+      type: String,
+      required: true,
+    },
     reactions: [reactionSchema],
   },
   {
@@ -29,11 +29,9 @@ const thoughtSchema = new Schema(
     toJSON: {
       virtuals: true,
       getters: true,
-        id: false,
-      }
-    },
-    id: false,
-  }
+      id: false,
+    }
+  },
 );
 
 // Create a virtual property `fullName` that gets and sets the user's full name
@@ -45,6 +43,6 @@ thoughtSchema.virtual('reactionCount')
 
 
 // Initialize our User model
-const Thought = model('thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
